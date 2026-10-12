@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  mock-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Mock regression (passing subset)
+        run: |
+          mkdir ci_audio
+          cp audio/wakeup_normal.wav audio/mis_wake_noise.wav audio/cmd_volume_up.wav ci_audio/
+          python scripts/audio_test.py --mock --audio-dir ci_audio
+
+      - name: CLI smoke test
+        run: python scripts/audio_test.py --help

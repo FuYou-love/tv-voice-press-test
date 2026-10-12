@@ -1,0 +1,18 @@
+# 运行时产物（每次执行自动生成，不入库）
+logs/
+output/
+__pycache__/
+*.pyc
+
+# 真实测试音频由使用者自备，不入库（避免语料版权/合规风险）
+# 仅保留 4 个程序化合成的示例音频（由 scripts/make_sample_audio.py 生成），
+# 保证 mock 模式与 CI 开箱即跑
+audio/*
+!audio/wakeup_normal.wav
+!audio/mis_wake_noise.wav
+!audio/cmd_volume_up.wav
+!audio/wakeup_noisy.wav
+
+# 系统文件
+.DS_Store
+Thumbs.db
